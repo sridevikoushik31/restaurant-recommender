@@ -8,28 +8,13 @@ var mongoose = require('mongoose'),
 	User = mongoose.model('User'),
 	_ = require('lodash');
 
-/**
- * Create a User
- */
-exports.create = function(req, res) {
-	var user = new User(req.body);
-	user.user = req.user;
-
-	user.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(user);
-		}
-	});
-};
 
 /**
  * Show the current User
  */
 exports.read = function(req, res) {
+	console.log("heyyyyyyyyyyyy");
+	console.log(req.user);
 	res.jsonp(req.user);
 };
 
@@ -96,12 +81,3 @@ exports.userByID = function(req, res, next, id) {
 	});
 };
 
-/**
- * User authorization middleware
- */
-exports.hasAuthorization = function(req, res, next) {
-	if (req.user.user.id !== req.user.id) {
-		return res.status(403).send('User is not authorized');
-	}
-	next();
-};

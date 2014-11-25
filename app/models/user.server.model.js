@@ -16,9 +16,8 @@ var UserSchema = new Schema({
 		required: 'Please fill User name',
 		trim: true
 	},
-	created: {
-		type: Date,
-		default: Date.now
+	userId:{
+		type: String
 	},
 	user: {
 		type: Schema.ObjectId,
