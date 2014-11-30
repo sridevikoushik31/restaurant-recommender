@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	User = mongoose.model('User'),
+	SimilarUser = mongoose.model('SimilarUser'),
 	_ = require('lodash');
 
 
@@ -74,7 +75,7 @@ exports.list = function(req, res) {
  */
 exports.userByID = function(req, res, next, id) { 
 	console.log("hererrerrerer  "+id);
-	User.findByName(id).populate('user', 'displayName').exec(function(err, user) {
+	User.findOne({name: id}).populate('user').exec(function(err, user) {
 		if (err) return next(err);
 		if (! user) return next(new Error('Failed to load User ' + id));
 		req.user = user ;

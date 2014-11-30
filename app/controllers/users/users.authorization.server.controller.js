@@ -13,7 +13,7 @@ var _ = require('lodash'),
 exports.userByID = function(req, res, next, id) {
 	console.log("in users authorication "+id);
 	User.findOne({
-		name: id
+		name: new RegExp('^'+id+'$', "i")
 	}).exec(function(err, user) {
 		if (err) return next(err);
 		if (!user) return next(new Error('Failed to load User ' + id));

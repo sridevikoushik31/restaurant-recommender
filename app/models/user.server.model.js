@@ -16,13 +16,10 @@ var UserSchema = new Schema({
 		required: 'Please fill User name',
 		trim: true
 	},
-	userId:{
-		type: String
-	},
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
 	}
-});
+},  {collection: 'user'});
 
 mongoose.model('User', UserSchema);
