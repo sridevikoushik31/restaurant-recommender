@@ -12,16 +12,15 @@ var mongoose = require('mongoose'),
 var SimilarUserSchema = new Schema({
 	similar_user: {
 		type: String,
-		default: '',
 	},
 	user_id: {
 		type: Schema.ObjectId,
-		ref: 'User'
+		// ref: 'User'
 	}
-},  {collection: 'SimilarUser'});
+},  {collection: 'similarUser'});
 
-Location.statics.findSimilarUsers = function(userId){
+SimilarUserSchema.statics.findSimilarUsers = function(userId){
 	return this.findOne({user_id: userId});
 }
 
-mongoose.model('SimilarUser', UserSchema);
+mongoose.model('SimilarUser', SimilarUserSchema);

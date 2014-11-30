@@ -58,7 +58,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 
 		// Find existing User
 		$scope.findOne = function() {
-			$scope.user = Users.get({ 
+			$scope.users = Users.get({ 
 				userId: $stateParams.userId
 			});
 		};
