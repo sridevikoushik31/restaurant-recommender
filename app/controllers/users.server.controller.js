@@ -1,4 +1,5 @@
 'use strict';
+var Q = require('q');
 
 /**
  * Module dependencies.
@@ -14,33 +15,71 @@ var mongoose = require('mongoose'),
  * Show the current User
  */
 exports.read = function(req, res) {
-	// console.log("heyyyyyyyyyyyy");
-	// console.log(req);
-	// console.log("heyyyyyyyyyyyy");
-	// console.log("heyyyyyyyyyyyy typeof "+typeof req.user);
-	// console.log("heyyyyyyyyyyyy typeof "+req.user['user_id']);
-
-	console.log("heyyyyyyyyyyyy");
-
-	// console.log(req.user.votes);
-
 	console.log(req.user.toObject()['user_id']);
 	var user_id=req.user.toObject()['user_id']
-	console.log(user_id);
+	var main_users1=[];
 
-	SimilarUser.find({similar_user: 'jVhEtuXwwRZgjaLti7Lecg'}).exec(function(err, users) {
+	SimilarUser.find({similar_user: { $in : ['jVhEtuXwwRZgjaLti7Lecg', 'e4hRx0m_SnQYc7BUo-LeVg'] }}).exec(function(err, users) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			console.log('response!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! '+users);
-			res.jsonp({hey :users});
-		}
-	});
+			// console.log('heyheyhey '+ users);
+			var user_ids = users.map(function(user){return user.similar_user;});
+			// console.log('user ids    ===== '+ user_ids);
+			User.find({user_id: {$in : user_ids }}).exec(function(err, main_users) {
+				// console.log('main users    ===== '+ main_users);
+				var return_user_details=[];
+				// content = 
+				for(var main_u = 0; main_u<main_users.length;main_u++){
+					for(var user =0; user< users.length; user++){
+						if(users[user].user_id == main_users[main_u].user_id){
+							var content = {'similarity_coeff': users[user].toObject()['similarity_coeff'], 'name': main_users[main_u].name}
+							return_user_details.push(content)
 
+						}
+					}
+				}
+				console.log(return_user_details);
+				res.jsonp({hey :return_user_details});
+
+			});
+}
+
+		// var prom =  Q.promise(function (resolve) {
+		// 		for(var i=0;i<users.length;i++){
+		// 			var new_user = users[i];
+		// 			User.find({user_id: ['jVhEtuXwwRZgjaLti7Lecg'}).exec(function(err, main_users) {
+
+		// 			if (err) {
+		// 				return res.status(400).send({
+		// 				message: errorHandler.getErrorMessage(err)});
+		// 			}
+		// 			else {
+		// 				var contents = {'similarity_coeff': new_user.toObject()['similarity_coeff'], 'name': main_users.toObject()['name']}
+		// 				main_users1.push(contents)
+		// 				console.log(JSON.stringify(contents));
+		// 				console.log("main users "+ main_users1);
+		// 				   }
+		// 			});
+		// 		}
+		// 	});
+
+		// 	prom.then(function() {
+		// 			console.log('so farrrrrr '+main_users1);
+		// 			console.log('FINALLLLLLYYYYYYYYYYYYYY '+main_users1);
+		// 			res.jsonp({hey :main_users1});
+		// 		}, function(reason){ console.log(reason)});
+		// 	}
+
+		});
+		
+	// });
+
+		
 	// res.jsonp(req.user);
-};
+}
 
 /**
  * Update a User
