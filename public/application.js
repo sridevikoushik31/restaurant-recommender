@@ -18,3 +18,25 @@ angular.element(document).ready(function() {
 	//Then init the app
 	angular.bootstrap(document, [ApplicationConfiguration.applicationModuleName]);
 });
+
+
+// angular.module('app', ['ui.bootstrap']);
+// ApplicationConfiguration.registerModule('carousel');
+// angular.module('carousel',  ['ui.bootstrap']).controller('CarouselDemoCtrl', ['$scope',
+// function CarouselDemoCtrl($scope){
+//   $scope.myInterval = 3000;
+//   $scope.slides = [
+//     {
+//       image: 'http://lorempixel.com/400/200/'
+//     },
+//     {
+//       image: 'http://lorempixel.com/400/200/food'
+//     },
+//     {
+//       image: 'http://lorempixel.com/400/200/sports'
+//     },
+//     {
+//       image: 'http://lorempixel.com/400/200/people'
+//     }
+//   ];
+// }]);

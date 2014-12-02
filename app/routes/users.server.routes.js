@@ -9,8 +9,8 @@ module.exports = function(app) {
 
 	app.route('/users/:userId')
 		.get(users.read)
-		.put(users.update)
-		.delete(users.delete);
+		// .put(users.update)
+		// .delete(users.delete);
 
 	// Finish by binding the User middleware
 	app.param('userId', users.userByID);

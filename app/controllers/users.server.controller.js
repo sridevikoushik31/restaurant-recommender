@@ -1,5 +1,5 @@
 'use strict';
-var Q = require('q');
+// var Q = require('q');
 
 /**
  * Module dependencies.
