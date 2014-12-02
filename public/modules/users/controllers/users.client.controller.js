@@ -1,7 +1,7 @@
 'use strict';
 
 // Users controller
-angular.module('users').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Users',
+angular.module('users', ['ui.bootstrap.carousel','ui.bootstrap.transition']).controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Users',
 	function($scope, $stateParams, $location, Authentication, Users) {
 		$scope.authentication = Authentication;
 
@@ -63,4 +63,8 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			});
 		};
 	}
-]);
+]).directive('carousel', [function() {
+		    return {
+
+		    }
+		}]);

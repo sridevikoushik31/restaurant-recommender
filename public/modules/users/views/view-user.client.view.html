@@ -1,101 +1,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 
-<div class="container-fluid">
+<!-- <div class="container-fluid">
     <div class="row-fluid">
     <div class="carousel slide" id="myCarousel">
             <div class="carousel-inner">
               <div class="item active">
                     <ul class="thumbnails">
-                        <li class="span3">
-                            <div class="caption">
-                                <h5>Caption</h5>
-                            </div>
-                            <div class="thumbnail">
-                                <img src="http://placehold.it/260x180" alt="">
-                            </div>
-                        </li>
-                        <li class="span3">
-                            <div class="caption">
-                                <h5>Caption</h5>
-                            </div>
-                            <div class="thumbnail">
-                                <img src="http://placehold.it/260x180" alt="">
-                            </div>
-                        </li>
-                        <li class="span3">
-                            <div class="caption">
-                                <h5>Caption</h5>
-                            </div>
-                            <div class="thumbnail">
-                                <img src="http://placehold.it/260x180" alt="">
-                            </div>
-                        </li>
-                        <li class="span3">
-                            <div class="caption">
-                                <h5>Caption</h5>
-                            </div>
-                            <div class="thumbnail">
-                                <img src="http://placehold.it/260x180" alt="">
-                            </div>
-                        </li>
-                    </ul>
-              </div>
-              <div class="item">
-                    <ul class="thumbnails">
-                        <li class="span3">
-                            <div class="caption">
-                                <h5>Caption</h5>
-                            </div>
-                            <div class="thumbnail">
-                                <img src="http://placehold.it/260x180" alt="">
-                            </div>
-                        </li>
-                        <li class="span3">
-                            <div class="caption">
-                                <h5>Caption</h5>
-                            </div>
-                            <div class="thumbnail">
-                                <img src="http://placehold.it/260x180" alt="">
-                            </div>
-                        </li>
-                        <li class="span3">
-                            <div class="caption">
-                                <h5>Caption</h5>
-                            </div>
-                            <div class="thumbnail">
-                                <img src="http://placehold.it/260x180" alt="">
-                            </div>
-                        </li>
-                        <li class="span3">
-                            <div class="caption">
-                                <h5>Caption</h5>
-                            </div>
-                            <div class="thumbnail">
-                                <img src="http://placehold.it/260x180" alt="">
-                            </div>
-                        </li>
-                    </ul>
-              </div>
-              <div class="item">
-                    <ul class="thumbnails">
-                        <li class="span3">
-                            <div class="caption">
-                                <h5>Caption</h5>
-                            </div>
-                            <div class="thumbnail">
-                                <img src="http://placehold.it/260x180" alt="">
-                            </div>
-                        </li>
-                        <li class="span3">
-                            <div class="caption">
-                                <h5>Caption</h5>
-                            </div>
-                            <div class="thumbnail">
-                                <img src="http://placehold.it/260x180" alt="">
-                            </div>
-                        </li>
-                        <li class="span3">
+                        <li  class="span3" data-ng-repeat="user in users.hey">
                             <div class="caption">
                                 <h5>Caption</h5>
                             </div>
@@ -119,3 +31,72 @@
         </div>
 </div>
 </diV>
+ -->
+
+<section data-ng-controller="UsersController" data-ng-init="findOne()">
+  <div class="page-header">
+    <h1 data-ng-bind="user.name"> Similar users...........</h1>
+  </div>
+  <div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == user.user._id))">
+    <a class="btn btn-primary" href="/#!/users/{{user._id}}/edit">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn btn-primary" data-ng-click="remove();">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <h1>Similar Users</h1>
+
+
+<div class="carousel" id="slider" style="margin-left: 20px;">
+    <label class="labelSecurity">Incident Photos</label><br />
+    <div class="carousel-inner">
+        <div class="item" data-ng-repeat="user in users.hey">
+            <span>'dsfm,df'</span>
+        </div>
+
+        <div class="item">
+            <span>sffdfdbfsbfjhsfdfhjf</span>
+        </div>
+        <div class="item">
+            <span>sdsdc jjjbkn</span>
+        </div>
+    </div>
+    <a class="carousel-control right" href="#slider" data-slide="next"></a>
+</div>
+
+
+
+
+<div class="container-fluid">
+    <div class="row-fluid">
+    <div class="carousel slide" id="myCarousel">
+            <div class="carousel-inner">
+              <div class="item active" data-ng-repeat="user in users.hey">
+                      <!-- <slide class="span3"  data-ng-repeat="user in users.hey"> -->
+                          <span data-ng-bind="user.similarity_coeff"></span>
+                          <br/>
+                          <span data-ng-bind="user.name"></span>
+                            <div class="caption">
+                                <h5>Caption</h5>
+                            </div>
+                       <!-- </slide> -->
+              </div>
+            </div>
+            <a data-slide="prev" href="#myCarousel" class="left carousel-control">‹</a>
+            <a data-slide="next" href="#myCarousel" class="right carousel-control">›</a>
+        </div>
+</div>
+</diV>
+
+
+  <small>
+    <em class="text-muted">
+      Posted on heyhey
+      <span data-ng-bind="user.created | date:'mediumDate'"></span>
+      by
+      <span data-ng-bind="user.user.displayName"></span>
+    </em>
+  </small>
+</section>
+

@@ -12,18 +12,3 @@
 	right: 10px;
 	position: absolute;
 }
-
-#slides_control > div{
-  height: 20px;
-}
-img{
-  margin:auto;
-  width: 400px;
-}
-#slides_control {
-  position:absolute;
-  width: 40px;
-  left:5%;
-  top:20px;
- margin-left:-200px;
-}
