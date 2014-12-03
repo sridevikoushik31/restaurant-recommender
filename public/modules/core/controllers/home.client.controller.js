@@ -77,7 +77,8 @@ function HomeController($scope, $location, $http ) {
 				        }
 				     })
 				     .success(function (data,status) {
-				          $scope.info_show = data
+				          $scope.users = data
+				     	  $location.path('users/' + 'Robert');
 				     });
 
 

@@ -42,8 +42,8 @@ exports.read = function(req, res) {
 						}
 					}
 				}
-				// console.log('made calllll&&&&&&&&&&&&&&');
-				// console.log(return_user_details);
+				console.log('made calllll&&&&&&&&&&&&&&');
+				console.log(return_user_details);
 				res.jsonp({hey :return_user_details});
 
 			});
