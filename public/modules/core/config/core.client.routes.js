@@ -11,6 +11,12 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 		state('home', {
 			url: '/',
 			templateUrl: 'modules/core/views/home.client.view.html'
-		});
+		}).
+		state('home_data_page', {
+			url: '/homeie',
+			templateUrl: 'modules/core/views/home_second.client.view.html'
+		})
+
+		;
 	}
 ]);

@@ -15,7 +15,8 @@ var mongoose = require('mongoose'),
  * Show the current User
  */
 exports.read = function(req, res) {
-	console.log(req.user.toObject()['user_id']);
+	// console.log(req.user.toObject()['user_id']);
+	console.log(req.query);
 	var user_id=req.user.toObject()['user_id']
 	var main_users1=[];
 
@@ -41,8 +42,8 @@ exports.read = function(req, res) {
 						}
 					}
 				}
-				console.log('made calllll&&&&&&&&&&&&&&');
-				console.log(return_user_details);
+				// console.log('made calllll&&&&&&&&&&&&&&');
+				// console.log(return_user_details);
 				res.jsonp({hey :return_user_details});
 
 			});
