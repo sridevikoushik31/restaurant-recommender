@@ -78,6 +78,7 @@ function HomeController($scope, $location, $http ) {
 				     })
 				     .success(function (data,status) {
 				          $scope.users = data
+				          console.log('set scope just now to '+JSON.stringify(data));
 				     	  $location.path('users/' + 'Robert');
 				     });
 
@@ -92,6 +93,60 @@ function HomeController($scope, $location, $http ) {
 }
 
 HomeController.$inject = ['$scope', '$location', '$http'];
+
+angular.module('core').directive('newd', [
+function (scope, element, attrs) {
+    return {
+      restrict: 'E',
+      // scope: {
+      //   users: '='
+      // },
+      link: function (scope, element, attrs) {
+        //Set margins, width, and height
+        var margin = {top: 20, right: 20, bottom: 30, left: 40},
+          width = 480 - margin.left - margin.right,
+          height = 360 - margin.top - margin.bottom;
+          
+        //Create the d3 element and position it based on margins
+        var svg = d3.select(element[0])
+          .append("svg")
+          .attr('width', width + margin.left + margin.right)
+          .attr('height', height + margin.top + margin.bottom)
+          .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+ 
+        //Create the scales we need for the graph
+        var x = d3.scale.ordinal().rangeRoundBands([0, width], .1);
+        var y = d3.scale.linear().range([height, 0]);
+ 
+        //Create the axes we need for the graph
+        var xAxis = d3.svg.axis()
+            .scale(x)
+            .orient("bottom");
+ 
+        var yAxis = d3.svg.axis()
+            .scale(y)
+            .orient("left")
+            .ticks(10);
+        
+        //Render graph based on 'data'
+        scope.render = function(data) {
+        	console.log(data)
+        	console.log('printed datatatatatatat..........................');
+          
+        }
+        
+        //Watch 'data' and run scope.render(newVal) whenever it changes
+        //Use true for 'objectEquality' property so comparisons are done on equality and not reference
+        scope.$watch('users', function(){
+          scope.render(scope.$parent.users);
+        }, true);  
+      }
+    };
+  }
+
+
+	])
 
 // angular.module('core').controller('HomeController', ['$scope','$location', 'mySharedService'
 // 	function($scope, $location, sharedService) {
