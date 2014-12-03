@@ -67,7 +67,7 @@ function HomeController($scope, $location, $http ) {
 				console.log(cuisine);
 				console.log('logging the message nowwwwwww ');
 				console.log(window.username);
-				window.username='e4hRx0m_SnQYc7BUo-LeVg';
+				// window.username=escape('-4ld1qpaBNLocSBe85jWnw');
 				// console.log($scope.user.name);
 				// $location.path('users/' + 'Robert');
 				$http
@@ -75,7 +75,10 @@ function HomeController($scope, $location, $http ) {
 				        params: {
 				            'zip_code': zip_code,
 				            'cuisine': cuisine
-				        }
+				        },
+				        // headers: 
+				        	// {'Content-Type': 'application/x-www-form-urlencoded'}
+				        
 				     })
 				     .success(function (data,status) {
 						  window.users = data
@@ -237,7 +240,7 @@ var tree = d3.layout.tree()
 var diagonal = d3.svg.diagonal()
  .projection(function(d) { return [d.y, d.x]; });
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("newd").append("svg")
  .attr("width", width + margin.right + margin.left)
  .attr("height", height + margin.top + margin.bottom)
   .append("g")
