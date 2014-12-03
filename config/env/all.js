@@ -56,7 +56,8 @@ module.exports = {
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
 				'public/lib/jquery/dist/jquery.min.js',
 				'public/lib/bootstrap/dist/js/bootstrap.min.js',
-				'public/lib/d3/d3.v3.min.js'
+				'public/lib/d3/d3.v3.min.js',
+				'public/lib/d3/d3.layout.js'
 			]
 		},
 		css: [

@@ -20,13 +20,14 @@ exports.read = function(req, res) {
 	var user_id=req.user.toObject()['user_id']
 	var main_users1=[];
 
-	SimilarUser.find({similar_user: { $in : ['jVhEtuXwwRZgjaLti7Lecg', 'e4hRx0m_SnQYc7BUo-LeVg'] }}).exec(function(err, users) {
+	SimilarUser.find({similar_user: 'e4hRx0m_SnQYc7BUo-LeVg'}).exec(function(err, users) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
 			// console.log('heyheyhey '+ users);
+
 			var user_ids = users.map(function(user){return user.similar_user;});
 			// console.log('user ids    ===== '+ user_ids);
 			User.find({user_id: {$in : user_ids }}).exec(function(err, main_users) {
