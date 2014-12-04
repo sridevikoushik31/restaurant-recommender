@@ -85,7 +85,7 @@ function HomeController($scope, $location, $http ) {
 						  $scope.restaurants = data.restaurants
 				          // window.users = 'datatatatatat';
 				          console.log('set scope just now to '+JSON.stringify(data));
-				     	  $location.path('/show_data);
+				     	  $location.path('/show_data');
 				     });
 
 				// $location.path('home');
