@@ -8,6 +8,7 @@ var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	User = mongoose.model('User'),
 	SimilarUser = mongoose.model('SimilarUser'),
+	PredictedUserRatings = mongoose.model('PredictedUserRatings'),
 	_ = require('lodash');
 
 
@@ -16,33 +17,45 @@ var mongoose = require('mongoose'),
  */
 exports.read = function(req, res) {
 	// console.log(req.user.toObject()['user_id']);
-	console.log(req.query);
+	// console.log(req.user);
 	var user_id=req.user.toObject()['user_id']
+	// console.log("user id is" + user_id);
 	var main_users1=[];
 
-	SimilarUser.find({similar_user: 'e4hRx0m_SnQYc7BUo-LeVg'}).exec(function(err, users) {
+	SimilarUser.find({'user_id': user_id}).exec(function(err, users) {
 		if (err) {
+			console.log(err)
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
 			// console.log('heyheyhey '+ users);
-
+			// users=[users]
 			var user_ids = users.map(function(user){return user.similar_user;});
 			// console.log('user ids    ===== '+ user_ids);
 			User.find({user_id: {$in : user_ids }}).exec(function(err, main_users) {
 				// console.log('main users    ===== '+ main_users);
 				var return_user_details=[];
 				// content = 
-				for(var main_u = 0; main_u<main_users.length;main_u++){
-					for(var user =0; user< users.length; user++){
-						if(users[user].user_id == main_users[main_u].user_id){
+				for(var user =0; user < users.length; user++){
+					for(var main_u = 0; main_u < main_users.length;main_u++){
+						// console.log(users[user].similar_user);
+						// console.log(main_users[main_u]);
+						if(users[user].similar_user == main_users[main_u].toObject()['user_id']){
 							var content = {'similarity_coeff': users[user].toObject()['similarity_coeff'], 'name': main_users[main_u].name}
 							return_user_details.push(content)
-
 						}
 					}
 				}
+				PredictedUserRatings.find({'user.user_id': '1BW2HC851fJKPfJeQxjkTA '}).exec(function(err, business) {
+					if (err){
+						console.log(err)
+					} else{
+						console.log('found_busines%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+						console.log(business)
+					}
+				});
+
 				console.log('made calllll&&&&&&&&&&&&&&');
 				console.log(return_user_details);
 				res.jsonp({hey :return_user_details});

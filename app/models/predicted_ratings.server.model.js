@@ -10,12 +10,8 @@ var mongoose = require('mongoose'),
  * User Schema
  */
 var PredictedUserRatingsSchema = new Schema({
-	similar_user: {
+	business_id: {
 		type: String,
-	},
-	user_id: {
-		type: Schema.ObjectId,
-		// ref: 'User'
 	}
 },  {collection: 'predicted_ratings'});
 

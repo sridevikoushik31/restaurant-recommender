@@ -14,7 +14,7 @@ var SimilarUserSchema = new Schema({
 		type: String,
 	},
 	user_id: {
-		type: Schema.ObjectId,
+		type: String,
 		// ref: 'User'
 	}
 },  {collection: 'similarUser'});
