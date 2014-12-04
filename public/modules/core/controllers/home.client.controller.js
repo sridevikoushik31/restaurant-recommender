@@ -82,9 +82,10 @@ function HomeController($scope, $location, $http ) {
 				     })
 				     .success(function (data,status) {
 						  window.users = data
+						  $scope.restaurants = data.restaurants
 				          // window.users = 'datatatatatat';
 				          console.log('set scope just now to '+JSON.stringify(data));
-				     	  $location.path('users/' + 'Robert');
+				     	  // $location.path('users/' + 'Robert');
 				     });
 
 				// $location.path('home');

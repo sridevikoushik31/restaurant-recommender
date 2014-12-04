@@ -21,6 +21,8 @@ exports.read = function(req, res) {
 	var user_id=req.user.toObject()['user_id']
 	// console.log("user id is" + user_id);
 	var main_users1=[];
+	var businesses=[];
+
 
 	SimilarUser.find({'user_id': user_id}).exec(function(err, users) {
 		if (err) {
@@ -47,18 +49,22 @@ exports.read = function(req, res) {
 						}
 					}
 				}
-				PredictedUserRatings.find({'user.user_id': '1BW2HC851fJKPfJeQxjkTA '}).exec(function(err, business) {
+
+				PredictedUserRatings.find({'user.user_id': new RegExp(user_id)}).exec(function(err, business) {
 					if (err){
 						console.log(err)
 					} else{
+						businesses=business
+
 						console.log('found_busines%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-						console.log(business)
+						console.log(businesses)
 					}
+					res.jsonp({hey :return_user_details, businesses: businesses});
 				});
 
-				console.log('made calllll&&&&&&&&&&&&&&');
-				console.log(return_user_details);
-				res.jsonp({hey :return_user_details});
+				// console.log('made calllll&&&&&&&&&&&&&&');
+				// console.log(return_user_details);
+				
 
 			});
 }
