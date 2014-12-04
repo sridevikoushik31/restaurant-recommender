@@ -15,9 +15,11 @@
         <form class="form-horizontal" data-ng-submit="show_similarity(zip_code, cuisine)" novalidate>
             <fieldset>
                 <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
+                    
                     <div class="controls">
-                        <input type="text" data-ng-model="zip_code" id="zip_code" class="form-control" placeholder="30318" required>
+                    <label class="control-label" for="name">Please input the City and Cuisine</label>
+                        <br/>
+                        <input type="text" data-ng-model="zip_code" id="zip_code" class="form-control" placeholder="Atlanta" required>
                         <br/>
                         <input type="text" data-ng-model="cuisine" id="cuisine" class="form-control" placeholder="Cuisine" required>
                     </div>

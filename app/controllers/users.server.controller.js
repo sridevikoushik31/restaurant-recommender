@@ -18,6 +18,7 @@ var mongoose = require('mongoose'),
 exports.read = function(req, res) {
 	// console.log(req.user.toObject()['user_id']);
 	// console.log(req.user);
+	var queries = req.query
 	var user_id=req.user.toObject()['user_id']
 	// console.log("user id is" + user_id);
 	var main_users1=[];
@@ -50,7 +51,9 @@ exports.read = function(req, res) {
 					}
 				}
 
-				PredictedUserRatings.find({'user.user_id': new RegExp(user_id)}).exec(function(err, business) {
+				PredictedUserRatings.find({'user.user_id': new RegExp(user_id), 
+											'city': new RegExp(queries.zip_code, 'i'),
+										   'categories': new RegExp(queries.cuisine, 'i')}).exec(function(err, business) {
 					if (err){
 						console.log(err)
 					} else{
@@ -61,10 +64,6 @@ exports.read = function(req, res) {
 					}
 					res.jsonp({hey :return_user_details, businesses: businesses});
 				});
-
-				// console.log('made calllll&&&&&&&&&&&&&&');
-				// console.log(return_user_details);
-				
 
 			});
 }
