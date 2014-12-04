@@ -17,7 +17,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 			templateUrl: 'modules/core/views/home_second.client.view.html'
 		}).
 		state('home_data_page', {
-			url: '/homeie',
+			url: '/show_data',
 			templateUrl: 'modules/core/views/home_user.client.view.html'
 		})
 
